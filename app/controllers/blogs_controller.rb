@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: %i[ show edit update destroy ]
+  # before_action :set_blog, only: %i[ show edit update destroy ]
+  before_action :set_blog, only: [:show, :edit, :update, :destroy]
 
   # GET /blogs or /blogs.json
   def index
@@ -25,11 +26,13 @@ class BlogsController < ApplicationController
 
     respond_to do |format|
       if @blog.save
-        format.html { redirect_to blog_url(@blog), notice: "Blog was successfully created." }
-        format.json { render :show, status: :created, location: @blog }
+        # format.html { redirect_to blog_url(@blog), notice: "Blog was successfully created." }
+        format.html { redirect_to @blog, notice: "Blog was successfully created." }
+        # format.html {redirect_to blog_path(@blog), notice: "Blog was successully created!"}
+        # format.json { render :show, status: :created, location: @blog }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @blog.errors, status: :unprocessable_entity }
+        # format.json { render json: @blog.errors, status: :unprocessable_entity }
       end
     end
   end
